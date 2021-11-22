@@ -7,8 +7,7 @@ namespace ConsoleGame
 
         public int Health;
         public readonly string Name;
-
-        private int _damageMax;
+        public readonly int DamageMax;
 
 
         public Enemy(string name, int health, int damageMax)
@@ -16,7 +15,7 @@ namespace ConsoleGame
 
             this.Name = name;
             this.Health = health;
-            this._damageMax = damageMax;
+            this.DamageMax = damageMax;
 
         }
 
@@ -27,8 +26,7 @@ namespace ConsoleGame
 
             Random random = new Random();
 
-            int damageDealt = random.Next(1, _damageMax);
-
+            int damageDealt = random.Next(1, DamageMax);
 
             return damageDealt;
 

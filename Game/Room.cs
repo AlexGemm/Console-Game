@@ -17,16 +17,21 @@ namespace ConsoleGame.Game
 
         }
 
+
         //Generates an array of enemies to fight using a list of potential enemy types given by the game manager.
         private List<Enemy> GenerateEnemies(List<Enemy> potentialEnemies, int amount)
         {
 
             List<Enemy> currentEnemies = new List<Enemy>();
 
+
             Random random = new Random();
             for (int i = 0; i < amount; i++)
             {
-                currentEnemies.Add(potentialEnemies[random.Next(potentialEnemies.Count)]);
+                //Pick a random potential enemy and make a clone of it in the current enemies list.
+                int picked = random.Next(0, potentialEnemies.Count);
+
+                currentEnemies.Add(new Enemy(potentialEnemies[picked].Name, potentialEnemies[picked].Health, potentialEnemies[picked].DamageMax));
             }
 
             return currentEnemies;
@@ -37,16 +42,17 @@ namespace ConsoleGame.Game
         {
             string introText = "In the room there is a ";
 
-            foreach (Enemy enemy in CurrentEnemies)
+            //Go through all the enemies in the current room and print them out to the user.
+            for (int i = 0; i < CurrentEnemies.Count; i++)
             {
-
-                if(CurrentEnemies.IndexOf(enemy) != CurrentEnemies.IndexOf(CurrentEnemies.Last()))
+                //Find the last iteration to see when the sentence needs to end.
+                if (i == (CurrentEnemies.Count - 1))
                 {
-                    introText += enemy.Name + ", ";
+                    introText += CurrentEnemies[i].Name + ".";
                 }
                 else
                 {
-                    introText += enemy.Name + ".";
+                    introText += CurrentEnemies[i].Name + ", ";
                 }
 
             }
@@ -55,3 +61,4 @@ namespace ConsoleGame.Game
         }
     }
 }
+
